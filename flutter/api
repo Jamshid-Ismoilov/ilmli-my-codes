@@ -1,3 +1,7 @@
+this is a explanation for flutter to use api
+
+wikipedia module not involved.
+
 [GIN-debug] GET    /users/                   --> 
 [GIN-debug] GET    /users/:userID            --> 
 [GIN-debug] GET    /users/teacher/:userID    -->

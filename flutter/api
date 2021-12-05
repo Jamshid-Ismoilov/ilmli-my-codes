@@ -1,0 +1,273 @@
+[GIN-debug] GET    /users/                   --> 
+[GIN-debug] GET    /users/:userID            --> 
+[GIN-debug] GET    /users/teacher/:userID    -->
+[GIN-debug] PUT    /users/update             -->
+[GIN-debug] GET    /posts/:postID            -->
+[GIN-debug] GET    /posts/user/:userID       -->
+[GIN-debug] GET    /posts/category/:categoryID -->
+[GIN-debug] POST   /posts/new                -->
+[GIN-debug] PUT    /posts/update             -->
+[GIN-debug] GET    /categories/:categoryID   -->
+[GIN-debug] GET    /categories/total         -->
+[GIN-debug] POST   /verify/signup            -->
+[GIN-debug] POST   /verify/signupCheck       -->
+[GIN-debug] POST   /verify/login             -->
+[GIN-debug] POST   /verify/logout            -->
+
+
+[GIN-debug] GET    /users/                   --> 
+
+request:
+header: param : token
+body: -
+
+response:
+body:
+type UserBody struct {
+	ID           int    `json:"-"`
+	Fullname     string `json:"fullname"`
+	Highlight    string `json:"highlight"`
+	MobileNumber string `json:"mobileNumber"`
+	Bio          string `json:"bio"`
+	Learners     int    `json:"learners"`
+	Picture      string `json:"picture"`
+}
+
+[GIN-debug] GET    /users/:userID            --> 
+
+request:
+header: -
+body: -
+
+response:
+
+type UserBody struct {
+	ID           int    `json:"-"`
+	Fullname     string `json:"fullname"`
+	Highlight    string `json:"highlight"`
+	MobileNumber string `json:"mobileNumber"`
+	Bio          string `json:"bio"`
+	Learners     int    `json:"learners"`
+	Picture      string `json:"picture"`
+}
+
+[GIN-debug] GET    /users/teacher/:userID    -->
+
+request:
+header: -
+body: -
+
+response:
+
+type TeacherBody struct {
+	ID        int    `json:"id"`
+	Fullname  string `json:"fullname"`
+	Highlight string `json:"highlight"`
+	Picture   string `json:"picture"`
+}
+
+
+[GIN-debug] PUT    /users/update             -->
+
+request: 
+header: param-token
+body:
+type UpdateUserBody struct {
+	Fullname     string `json:"fullname"`
+	Highlight    string `json:"highlight"`
+	MobileNumber string `json:"mobileNumber"`
+	Bio          string `json:"bio"`
+	Picture      string `json:"picture"`
+}
+
+response:
+body:
+
+type UserBody struct {
+	ID           int    `json:"-"`
+	Fullname     string `json:"fullname"`
+	Highlight    string `json:"highlight"`
+	MobileNumber string `json:"mobileNumber"`
+	Bio          string `json:"bio"`
+	Learners     int    `json:"learners"`
+	Picture      string `json:"picture"`
+}
+
+[GIN-debug] GET    /posts/:postID            -->
+
+request:
+	header: -
+	body: -
+
+response:
+	body:
+
+type FullPostBody struct {
+	ID      string `json:"id"`
+	Name    string `json:"name"`
+	Content string `json:"content"`
+	Source  string `json:"source"`
+	Picture string `json:"picture"`
+}
+
+[GIN-debug] GET    /posts/user/:userID       -->
+
+request:
+	header: -
+	body: -
+
+response:
+ 	body:
+		array[0]:	 	
+			type PostBody struct {
+				ID      string `json:"id"`
+				Name    string `json:"name"`
+				Picture string `json:"picture"`
+			}
+
+[GIN-debug] GET    /posts/category/:categoryID -->
+
+request:
+	header: -
+	body: -
+
+response:
+ 	body:
+		array[0]:	 	
+			type PostBody struct {
+				ID      string `json:"id"`
+				Name    string `json:"name"`
+				Picture string `json:"picture"`
+			}
+[GIN-debug] POST   /posts/new                -->
+
+request:
+	header: param-token
+	body: 
+		type NewPostBody struct {
+			Name       string `json:"name"`
+			Content    string `json:"content"`
+			Source     string `json:"source"`
+			Picture    string `json:"picture"`
+			CategoryID int    `json:"categoryId"`
+		}
+
+response:
+    body:
+
+		type FullPostBody struct {
+			ID      string `json:"id"`
+			Name    string `json:"name"`
+			Content string `json:"content"`
+			Source  string `json:"source"`
+			Picture string `json:"picture"`
+		}
+
+[GIN-debug] PUT    /posts/update             -->
+
+request:
+	header: param-token
+	body: 
+		type UpdatePostBody struct {
+			ID      int    `json:"id"`
+			Name    string `json:"name"`
+			Content string `json:"content"`
+			Source  string `json:"source"`
+			Picture string `json:"picture"`
+		}
+
+response:
+    body:
+		type FullPostBody struct {
+			ID      string `json:"id"`
+			Name    string `json:"name"`
+			Content string `json:"content"`
+			Source  string `json:"source"`
+			Picture string `json:"picture"`
+		}
+
+[GIN-debug] GET    /categories/:categoryID   -->
+
+request:
+	header: -
+	body: -
+
+response:
+	 	type CategoryBody struct {
+			ID          string `json:"id"`
+			Name        string `json:"name"`
+			Description string `json:"description"`
+			Picture     string `json:"picture"`
+			}
+
+[GIN-debug] GET    /categories/total         -->
+
+request:
+	header: -
+	body: -
+
+response:
+	array[0]:
+	 	type CategoryBody struct {
+			ID          string `json:"id"`
+			Name        string `json:"name"`
+			Description string `json:"description"`
+			Picture     string `json:"picture"`
+			}
+
+[GIN-debug] POST   /verify/signup            -->
+
+request:
+
+	header: -
+	body: 
+		type SignupBody struct {
+			Email string `json:"email"`
+		}
+response:
+	header: 201 0r 405
+	body: text message
+
+
+[GIN-debug] POST   /verify/signupCheck       -->
+
+request:
+
+	header: -
+	body: 
+		type LoginBody struct {
+			Email    string `json:"email"`
+			Password string `json:"password"`
+		}
+
+response:
+	header: 201 or 405 
+	body: token
+
+[GIN-debug] POST   /verify/login             -->
+
+request:
+	header: -
+	body: 
+		type LoginBody struct {
+			Email    string `json:"email"`
+			Password string `json:"password"`
+		}
+
+response:
+	header: 201 or 405 
+	body: token
+
+[GIN-debug] POST   /verify/logout            -->
+
+request:
+	header: -
+	body: 
+		type LoginBody struct {
+			Email    string `json:"email"`
+			Password string `json:"password"`
+		}
+
+response:
+	header: 201 or 405 
+	body: text message
